@@ -49,13 +49,13 @@ I'm not sure exactly where the dependency chain includes PID.hh for the first ti
 //const std::string RobotiqHandPluginSingleHand::DefaultRightTopicState   =
   //"/right_hand/state";
 const std::string RobotiqHandPluginSingleHand::DefaultLeftTopicCommand  =
-  "SModelRobot_gazebo/command";
+  "SModelRobotOutput";
 const std::string RobotiqHandPluginSingleHand::DefaultLeftTopicState    =
-  "SModelRobot_gazebo/state";
+  "SModelRobotInput";
 const std::string RobotiqHandPluginSingleHand::DefaultRightTopicCommand =
-  "SModelRobot_gazebo/command";
+  "SModelRobotOutput";
 const std::string RobotiqHandPluginSingleHand::DefaultRightTopicState   =
-  "SModelRobot_gazebo/state";
+  "SModelRobotInput";
  
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -196,10 +196,13 @@ void RobotiqHandPluginSingleHand::Load(gazebo::physics::ModelPtr _parent,
     stateTopicName, 100, true);
 
   // Broadcast joint state.
-  std::string topicBase = std::string("robotiq_hands/") + this->side;
+  //std::string topicBase = std::string("robotiq_hands/") + this->side;
   this->pubJointStatesQueue = this->pmq.addPub<sensor_msgs::JointState>();
+  //this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
+    //topicBase + std::string("_hand/joint_states"), 10);
   this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
-    topicBase + std::string("_hand/joint_states"), 10);
+    "/gripper/joint_states", 10);
+
 
   // Subscribe to user published handle control commands.
   ros::SubscribeOptions handleCommandSo =
