@@ -6,7 +6,8 @@ Creates an articulated s-model hand with the passed in prefix.  If there
 is only one hand in the urdf then an empty prefix can be used "".  If
 there are multiple hands then a prefix followed by an "_" is needed.
 -->
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotiq_hand">
+<!--<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotiq_hand">-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:macro name="robotiq_finger" params="prefix">
     <!-- Link list -->
@@ -691,14 +692,15 @@ there are multiple hands then a prefix followed by an "_" is needed.
 
   </xacro:macro>
 
-  <xacro:macro name="robotiq_hand" params="prefix *origin reflect parent">
+  <!--<xacro:macro name="robotiq_hand" params="prefix *origin reflect parent">-->
+  <xacro:macro name="robotiq_hand" params="prefix reflect">
 
     <!-- joint attaching parent link to robotiq hand -->
-    <joint name="${prefix}robotiq_hand_joint" type="fixed">
-      <insert_block name="origin"/>
-      <parent link="${parent}"/>
-      <child link="${prefix}palm"/>
-    </joint>
+    <!--<joint name="${prefix}robotiq_hand_joint" type="fixed">-->
+      <!--<insert_block name="origin"/>-->
+      <!--<parent link="${parent}"/>-->
+      <!--<child link="${prefix}palm"/>-->
+    <!--</joint>-->
 
     <!-- Insert the fingers -->
     <xacro:robotiq_finger prefix="${prefix}finger_1_"/>

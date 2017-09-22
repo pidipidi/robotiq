@@ -27,3 +27,11 @@ add_dependencies(RobotiqHandPlugin robotiq_s_model_articulated_msgs_gencpp)
 
 install(TARGETS RobotiqHandPlugin DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME}/plugins/)
 
+add_library(RobotiqHandPluginSingleHand src/RobotiqHandPluginSingleHand.cpp)
+set_target_properties(RobotiqHandPluginSingleHand PROPERTIES LINK_FLAGS "${ld_flags}")
+set_target_properties(RobotiqHandPluginSingleHand PROPERTIES COMPILE_FLAGS "${cxx_flags}")
+target_link_libraries(RobotiqHandPluginSingleHand ${catkin_LIBRARIES})
+add_dependencies(RobotiqHandPluginSingleHand robotiq_s_model_articulated_msgs_gencpp)
+
+install(TARGETS RobotiqHandPluginSingleHand DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME}/plugins/)
+
