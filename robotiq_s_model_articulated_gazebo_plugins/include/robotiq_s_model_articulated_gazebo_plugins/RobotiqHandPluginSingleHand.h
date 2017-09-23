@@ -272,7 +272,7 @@ class RobotiqHandPluginSingleHand : public gazebo::ModelPlugin
   private: sdf::ElementPtr sdf;
 
   /// \brief Used to select between 'left' or 'right' hand.
-  private: std::string side;
+  //private: std::string side;
 
   /// \brief Vector containing all the joint names.
   private: std::vector<std::string> jointNames;

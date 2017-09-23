@@ -48,14 +48,15 @@ I'm not sure exactly where the dependency chain includes PID.hh for the first ti
   //"/right_hand/command";
 //const std::string RobotiqHandPluginSingleHand::DefaultRightTopicState   =
   //"/right_hand/state";
+
 const std::string RobotiqHandPluginSingleHand::DefaultLeftTopicCommand  =
   "SModelRobotOutput";
 const std::string RobotiqHandPluginSingleHand::DefaultLeftTopicState    =
   "SModelRobotInput";
-const std::string RobotiqHandPluginSingleHand::DefaultRightTopicCommand =
-  "SModelRobotOutput";
-const std::string RobotiqHandPluginSingleHand::DefaultRightTopicState   =
-  "SModelRobotInput";
+//const std::string RobotiqHandPluginSingleHand::DefaultRightTopicCommand =
+  //"SModelRobotOutput";
+//const std::string RobotiqHandPluginSingleHand::DefaultRightTopicState   =
+  //"SModelRobotInput";
  
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -134,11 +135,11 @@ void RobotiqHandPluginSingleHand::Load(gazebo::physics::ModelPtr _parent,
   // Default ROS topic names.
   std::string controlTopicName = this->DefaultLeftTopicCommand;
   std::string stateTopicName   = this->DefaultLeftTopicState;
-  if (this->side == "right")
-  {
-    controlTopicName = this->DefaultRightTopicCommand;
-    stateTopicName   = this->DefaultRightTopicState;
-  }
+  //if (this->side == "right")
+  //{
+    //controlTopicName = this->DefaultRightTopicCommand;
+    //stateTopicName   = this->DefaultRightTopicState;
+  //}
   gzlog << "Using control topic " << controlTopicName << std::endl;
 
   for (int i = 0; i < this->NumJoints; ++i)
@@ -169,11 +170,11 @@ void RobotiqHandPluginSingleHand::Load(gazebo::physics::ModelPtr _parent,
   }
 
   // Overload the ROS topics for the hand if they are available.
-  if (this->sdf->HasElement("topic_command"))
-    controlTopicName = this->sdf->Get<std::string>("topic_command");
+  //if (this->sdf->HasElement("topic_command"))
+    //controlTopicName = this->sdf->Get<std::string>("topic_command");
 
-  if (this->sdf->HasElement("topic_state"))
-    stateTopicName = this->sdf->Get<std::string>("topic_state");
+  //if (this->sdf->HasElement("topic_state"))
+    //stateTopicName = this->sdf->Get<std::string>("topic_state");
 
   // Initialize ROS.
   if (!ros::isInitialized())
@@ -229,8 +230,8 @@ void RobotiqHandPluginSingleHand::Load(gazebo::physics::ModelPtr _parent,
       boost::bind(&RobotiqHandPluginSingleHand::UpdateStates, this));
 
   // Log information.
-  gzlog << "RobotiqHandPluginSingleHand loaded for " << this->side << " hand."
-        << std::endl;
+  //gzlog << "RobotiqHandPluginSingleHand loaded for " << this->side << " hand."
+        //<< std::endl;
   for (int i = 0; i < this->NumJoints; ++i)
   {
     gzlog << "Position PID parameters for joint ["
@@ -883,8 +884,8 @@ bool RobotiqHandPluginSingleHand::FindJoints()
     return false;
   this->jointNames.push_back(prefix + suffix);
 
-  gzlog << "RobotiqHandPluginSingleHand found all joints for " << this->side
-        << " hand." << std::endl;
+  //gzlog << "RobotiqHandPluginSingleHand found all joints for " << this->side
+        //<< " hand." << std::endl;
   return true;
 }
 
