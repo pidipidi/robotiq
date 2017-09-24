@@ -196,13 +196,17 @@ void RobotiqHandPluginSingleHand::Load(gazebo::physics::ModelPtr _parent,
   this->pubHandleState = this->rosNode->advertise<robotiq_s_model_articulated_msgs::SModelRobotInput>(
     stateTopicName, 100, true);
 
+  // Note that we will no longer publish joint states here
+  // Instead, we will publish joint states in ./src/cob_robots/cob_bringup/drivers/robotiq.launch
+  // so that we won't need to change where to publish joint states when running the real gripper vs the simulated one
+
   // Broadcast joint state.
   //std::string topicBase = std::string("robotiq_hands/") + this->side;
-  this->pubJointStatesQueue = this->pmq.addPub<sensor_msgs::JointState>();
+  // this->pubJointStatesQueue = this->pmq.addPub<sensor_msgs::JointState>();
   //this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
     //topicBase + std::string("_hand/joint_states"), 10);
-  this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
-    "/gripper/joint_states", 10);
+  // this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
+    // "/gripper/joint_states", 10);
 
 
   // Subscribe to user published handle control commands.
@@ -664,7 +668,7 @@ void RobotiqHandPluginSingleHand::GetAndPublishJointState(
     // better to use GetForceTorque dot joint axis
     this->jointStates.effort[i] = this->joints[i]->GetForce(0u);
   }
-  this->pubJointStatesQueue->push(this->jointStates, this->pubJointStates);
+  // this->pubJointStatesQueue->push(this->jointStates, this->pubJointStates);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

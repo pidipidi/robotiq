@@ -254,10 +254,10 @@ class RobotiqHandPluginSingleHand : public gazebo::ModelPlugin
   private: PubQueue<robotiq_s_model_articulated_msgs::SModelRobotInput>::Ptr pubHandleStateQueue;
 
   /// \brief Joint state publisher (rviz visualization).
-  private: ros::Publisher pubJointStates;
+  // private: ros::Publisher pubJointStates;
 
   /// \brief ROS publisher queue for joint states.
-  private: PubQueue<sensor_msgs::JointState>::Ptr pubJointStatesQueue;
+  // private: PubQueue<sensor_msgs::JointState>::Ptr pubJointStatesQueue;
 
   /// \brief ROS joint state message.
   private: sensor_msgs::JointState jointStates;
