@@ -16,6 +16,9 @@
     * `/SModelRobotOutput` == `/<left or right>_hand/command`
     * `/SModelRobotInput` == `/<left or right>_hand/state`
 
+  * Note that for simulating the gripper, we have developed another gazebo plugin located at `./src/robotiq/robotiq_s_model_articulated_gazebo_plugins/include/robotiq_s_model_articulated_gazebo_plugins/RobotiqHandPluginSingleHand_controlMsg.h`.
+    * Eventually, we prefer this plugin rather than `RobotiqHandPluginSingleHand.h` because we will publish msg type = `robotiq_s_model_control/SModel_robot_input` and `robotiq_s_model_control/SModel_robot_output` to topics `/SModelRobotInput` and `/SModelRobotOutput` for controlling BOTH the real and simulated gripper in the **SAME** way. If we use `RobotiqHandPluginSingleHand.h`, then we are publishing the msg type = `robotiq_s_model_articulated_msgs/SModelRobotInput` and `robotiq_s_model_articulated_msgs/SModelRobotOutput` in simulation. This is fine with simulation, but might not work for real robot. Not sure though.
+
+
 ## Issue
 * Note that when running the real gripper, we need to run the `robotiq_joint_state_publisher` from `./src/cob_robots/cob_bringup/drivers/robotiq.launch` to publish the joint states of the gripper to `/SModelRobotInput`. Therefore, when running the simulated gripper in Gazebo, we want to keep the same code which publishes joint states of the gripper from the `robotiq_joint_state_publisher`. We have to change our Gazebo plugin - `RobotiqHandPluginSingleHand.h` at `./src/robotiq/robotiq_s_model_articulated_gazebo_plugins/include/robotiq_s_model_articulated_gazebo_plugins` so that the plugin will not publish same joint states to `/SModelRobotInput`. If both nodes are publishing joint states to the same topic - `/SModelRobotInput`, the content under that topic will jitter, e.g. `1` in this moment, `2` in next moment, and `1` in next next moment ...
-
