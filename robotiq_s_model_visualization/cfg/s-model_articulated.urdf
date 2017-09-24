@@ -12,7 +12,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0" xyz="0.020 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.dae"/>
       </geometry>
       <material name="green">
         <color rgba="0 1 0 1"/>
@@ -21,7 +21,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     <collision>
       <origin rpy="0 3.1416 -1.57" xyz="-0.0455 0.0414 0.036"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.dae"/>
       </geometry>
       <material name="yellow">
         <color rgba="0 1 1 1"/>
@@ -37,14 +37,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 -0.52" xyz="0.050 -.028 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 -0.52" xyz="0.050 -.028 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -63,14 +63,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0" xyz="0.039 0 0.0075"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.039 0 0.0075"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -84,14 +84,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0.52" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 0.52" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -126,7 +126,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0" xyz="0.020 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.dae"/>
       </geometry>
       <material name="green">
         <color rgba="0 1 0 1"/>
@@ -135,7 +135,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     <collision>
       <origin rpy="0 3.1416 -1.57" xyz="-0.0455 0.0414 0.036"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.dae"/>
       </geometry>
       <material name="yellow">
         <color rgba="0 1 1 1"/>
@@ -151,14 +151,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 -0.52" xyz="0.050 -.028 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 -0.52" xyz="0.050 -.028 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -177,14 +177,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0" xyz="0.039 0 0.0075"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.039 0 0.0075"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -198,14 +198,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0.52" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 0.52" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -240,7 +240,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0" xyz="0.020 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_0.dae"/>
       </geometry>
       <material name="green">
         <color rgba="0 1 0 1"/>
@@ -249,7 +249,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     <collision>
       <origin rpy="0 3.1416 -1.57" xyz="-0.0455 0.0414 0.036"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_0.dae"/>
       </geometry>
       <material name="yellow">
         <color rgba="0 1 1 1"/>
@@ -265,14 +265,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 -0.52" xyz="0.050 -.028 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_1.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 -0.52" xyz="0.050 -.028 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_1.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -291,14 +291,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0" xyz="0.039 0 0.0075"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_2.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.039 0 0.0075"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_2.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -312,14 +312,14 @@ s-model_articulated - articulated version of the robotiq s-model,
     <visual>
       <origin rpy="0 0 0.52" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/link_3.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
     <collision>
       <origin rpy="0 0 0.52" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/link_3.dae"/>
       </geometry>
       <material name="yellow"/>
     </collision>
@@ -353,7 +353,7 @@ s-model_articulated - articulated version of the robotiq s-model,
   <link name="palm">
     <visual>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/palm.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/palm.dae"/>
       </geometry>
       <material name="green">
         <color rgba="0 1 0 1"/>
@@ -361,7 +361,7 @@ s-model_articulated - articulated version of the robotiq s-model,
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/palm.STL"/>
+        <mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/palm.dae"/>
       </geometry>
       <material name="yellow">
         <color rgba="0 1 1 1"/>

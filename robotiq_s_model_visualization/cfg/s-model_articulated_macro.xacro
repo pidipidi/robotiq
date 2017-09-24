@@ -17,7 +17,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
 		<link name="${prefix}palm">
 			<visual>
 				<geometry>
-					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/palm.STL" />
+					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/visual/palm.dae" />
 				</geometry>
 				<material name="gray">
 					<color rgba="0.2 0.2 0.2 1"/>
@@ -25,7 +25,7 @@ there are multiple hands then a prefix followed by an "_" is needed.
 			</visual>
 			<collision>
 				<geometry>
-					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/palm.STL" />
+					<mesh filename="package://robotiq_s_model_visualization/meshes/s-model_articulated/collision/palm.dae" />
 				</geometry>
 				<material name="yellow">
 					<color rgba="0 1 1 1"/>
