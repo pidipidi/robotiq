@@ -558,18 +558,26 @@ void RobotiqHandPluginSingleHand_controlMsg::GetAndPublishHandleState()
     this->handleState.gIMC = 3;
 
   // Check fingers' speed.
-  bool isMovingA = this->joints[2]->GetVelocity(0) > this->VelTolerance;
-  bool isMovingB = this->joints[3]->GetVelocity(0) > this->VelTolerance;
-  bool isMovingC = this->joints[4]->GetVelocity(0) > this->VelTolerance;
+  //std::cout<<"speed A="<<this->joints[2]->GetVelocity(0)<<std::endl;
+  //std::cout<<"speed B="<<this->joints[3]->GetVelocity(0)<<std::endl;
+  //std::cout<<"speed C="<<this->joints[4]->GetVelocity(0)<<std::endl;
+  bool isMovingA = std::abs(this->joints[2]->GetVelocity(0)) > this->VelTolerance;
+  bool isMovingB = std::abs(this->joints[3]->GetVelocity(0)) > this->VelTolerance;
+  bool isMovingC = std::abs(this->joints[4]->GetVelocity(0)) > this->VelTolerance;
 
   // Check if the fingers reached their target positions.
+  // TODO: What if something stuck between the fingers?
+  // Will the error becomes huge then?
   double pe, ie, de;
   this->posePID[2].GetErrors(pe, ie, de);
   bool reachPositionA = pe < this->PoseTolerance;
+  //std::cout<<"error A="<<pe<<std::endl;
   this->posePID[3].GetErrors(pe, ie, de);
   bool reachPositionB = pe < this->PoseTolerance;
+  //std::cout<<"error B="<<pe<<std::endl;
   this->posePID[4].GetErrors(pe, ie, de);
   bool reachPositionC = pe < this->PoseTolerance;
+  //std::cout<<"error C="<<pe<<std::endl;
 
   // gSTA. Motion status.
   if (isMovingA || isMovingB || isMovingC)

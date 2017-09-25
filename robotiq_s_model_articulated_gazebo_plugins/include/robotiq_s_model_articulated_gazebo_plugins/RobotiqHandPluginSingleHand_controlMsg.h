@@ -177,7 +177,10 @@ class RobotiqHandPluginSingleHand_controlMsg : public gazebo::ModelPlugin
 
   /// \brief Velocity tolerance. Below this value we assume that the joint is
   /// stopped (rad/s).
-  private: static const double VelTolerance = 0.002;
+  // Brad's setting
+  //private: static const double VelTolerance = 0.002;
+  // TODO: XXX: Shen changed this, we might need to change it back
+  private: static const double VelTolerance = 0.010;
 
   /// \brief Position tolerance. If the difference between target position and
   /// current position is within this value we'll conclude that the joint
