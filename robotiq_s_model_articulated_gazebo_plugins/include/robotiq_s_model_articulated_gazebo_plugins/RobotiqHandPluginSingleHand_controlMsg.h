@@ -178,22 +178,22 @@ class RobotiqHandPluginSingleHand_controlMsg : public gazebo::ModelPlugin
   /// \brief Velocity tolerance. Below this value we assume that the joint is
   /// stopped (rad/s).
   // Brad's setting
-  //private: static const double VelTolerance = 0.002;
+  //private: static constexpr double VelTolerance = 0.002;
   // TODO: XXX: Shen changed this, we might need to change it back
-  private: static const double VelTolerance = 0.010;
+  private: static constexpr double VelTolerance = 0.010;
 
-  /// \brief Position tolerance. If the difference between target position and
+  /// \brief constexpr tolerance. If the difference between target position and
   /// current position is within this value we'll conclude that the joint
   /// reached its target (rad).
-  private: static const double PoseTolerance = 0.002;
+  private: static constexpr double PoseTolerance = 0.002;
 
-  /// \brief Min. joint speed (rad/s). Finger is 125mm and tip speed is 22mm/s.
-  private: static const double MinVelocity = 0.176;
+  /// \brief constexpr. joint speed (rad/s). Finger is 125mm and tip speed is 22mm/s.
+  private: static constexpr double MinVelocity = 0.176;
 
-  /// \brief Max. joint speed (rad/s). Finger is 125mm and tip speed is 110mm/s.
-  private: static const double MaxVelocity = 0.88;
+  /// \brief constexpr. joint speed (rad/s). Finger is 125mm and tip speed is 110mm/s.
+  private: static constexpr double MaxVelocity = 0.88;
 
-  /// \brief Default topic name for sending control updates to the left hand.
+  /// \brief constexpr topic name for sending control updates to the left hand.
   private: static const std::string DefaultLeftTopicCommand;
 
   /// \brief Default topic name for receiving state updates from the left hand.
