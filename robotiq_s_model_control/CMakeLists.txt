@@ -76,11 +76,6 @@ add_dependencies(${PROJECT_NAME}
   ${catkin_EXPORTED_TARGETS}
 )
 
-# https://answers.ros.org/question/64448/trouble-with-catkin-compiling-node-and-generating-messages-in-same-package/
-add_dependencies(${PROJECT_NAME} 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-)
- 
 add_executable(s_model_ethercat_node
   src/${PROJECT_NAME}/s_model_ethercat_client.cpp
   src/s_model_ethercat_node.cpp
