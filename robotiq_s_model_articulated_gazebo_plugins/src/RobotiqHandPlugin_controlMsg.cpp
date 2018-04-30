@@ -50,12 +50,15 @@ I'm not sure exactly where the dependency chain includes PID.hh for the first ti
   // "/right_hand/state";
 
 
+// The text to put in the field of "<side>" when you call attach libRobotiqHandPlugin_controlMsg.so with your urdf at https://github.com/Shentheman/robotiq/blob/16a39a78a2db1c43830b7d025a1fc3901d985deb/robotiq_s_model_visualization/cfg/common.gazebo.xacro#L12
 const std::string RobotiqHandPluginControlMsg::left_side = "left_hand";
 const std::string RobotiqHandPluginControlMsg::right_side = "right_hand";
 
+// The prefix that will appear in your /robot_description before each joint and link.
 const std::string RobotiqHandPluginControlMsg::left_prefix = "left_hand_";
 const std::string RobotiqHandPluginControlMsg::right_prefix = "right_hand_";
 
+// The ROS topics that you can send commands to and acquire states from, in order to control the simulated and real robot.
 const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicCommand  =
   "/left_hand/SModelRobotOutput";
 const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicState    =
@@ -65,6 +68,7 @@ const std::string RobotiqHandPluginControlMsg::DefaultRightTopicCommand =
 const std::string RobotiqHandPluginControlMsg::DefaultRightTopicState   =
   "/right_hand/SModelRobotInput";
 
+// The ROS topics that the plugin will publish the joint_states to.
 const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicJointStates   =
   "/left_hand/joint_states";
 const std::string RobotiqHandPluginControlMsg::DefaultRightTopicJointStates   =

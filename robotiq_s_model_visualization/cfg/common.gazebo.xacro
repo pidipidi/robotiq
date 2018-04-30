@@ -3,7 +3,7 @@
 
   <!-- <gazebo>
     <plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">
-      <side>left</side>
+      <side>$(arg namespace_without_slash)</side>
     </plugin>
   </gazebo> -->
 
@@ -12,4 +12,5 @@
       <side>$(arg namespace_without_slash)</side>
     </plugin>
   </gazebo>
+  
 </robot>

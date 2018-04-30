@@ -4,10 +4,19 @@
   <arg name="paused" default="false"/>
   <arg name="gui" default="true"/>
 
+  <!-- If we are using the [`RobotiqHandPlugin_controlMsg` plugin](https://github.com/Shentheman/robotiq/blob/irg-jade/robotiq_s_model_articulated_gazebo_plugins/src/RobotiqHandPlugin_controlMsg.cpp) -->
   <arg name="namespace_with_slash" default="/left_hand"/>
   <arg name="namespace_without_slash" default="left_hand"/>
   <arg name="prefix_without_underscore" default="left_hand"/>
   
+
+  <!-- If we are using the [`RobotiqHandPlugin` plugin](https://github.com/Shentheman/robotiq/blob/irg-jade/robotiq_s_model_articulated_gazebo_plugins/src/RobotiqHandPlugin.cpp) -->
+  <!-- <arg name="namespace_with_slash" default="/robotiq_hands/left_hand"/>
+  <arg name="namespace_without_slash" default="left"/>
+  <arg name="prefix_without_underscore" default="l"/> -->
+
+
+
 
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">

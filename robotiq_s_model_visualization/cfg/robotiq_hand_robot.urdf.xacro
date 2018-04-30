@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
        name="robotiq_hand" >
 
-  <xacro:arg name="namespace_without_slash" default="/gripper"/>
-  <xacro:arg name="prefix_without_underscore" default="gripper"/>
+  <xacro:arg name="namespace_without_slash" default="left_hand"/>
+  <xacro:arg name="prefix_without_underscore" default="left_hand"/>
   <xacro:arg name="prefix" default="$(arg prefix_without_underscore)_"/>
 
   <!-- common stuff -->
