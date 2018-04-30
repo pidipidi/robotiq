@@ -29,13 +29,13 @@ add_dependencies(RobotiqHandPlugin robotiq_s_model_articulated_msgs_gencpp)
 install(TARGETS RobotiqHandPlugin DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME}/plugins/)
 
 
-add_library(RobotiqHandPluginOptimusPrefix src/RobotiqHandPluginOptimusPrefix.cpp)
-set_target_properties(RobotiqHandPluginOptimusPrefix PROPERTIES LINK_FLAGS "${ld_flags}")
-set_target_properties(RobotiqHandPluginOptimusPrefix PROPERTIES COMPILE_FLAGS "${cxx_flags}")
-target_link_libraries(RobotiqHandPluginOptimusPrefix ${catkin_LIBRARIES})
-add_dependencies(RobotiqHandPluginOptimusPrefix robotiq_s_model_articulated_msgs_gencpp)
+add_library(RobotiqHandPlugin_controlMsg src/RobotiqHandPlugin_controlMsg.cpp)
+set_target_properties(RobotiqHandPlugin_controlMsg PROPERTIES LINK_FLAGS "${ld_flags}")
+set_target_properties(RobotiqHandPlugin_controlMsg PROPERTIES COMPILE_FLAGS "${cxx_flags}")
+target_link_libraries(RobotiqHandPlugin_controlMsg ${catkin_LIBRARIES})
+add_dependencies(RobotiqHandPlugin_controlMsg robotiq_s_model_articulated_msgs_gencpp)
 
-install(TARGETS RobotiqHandPluginOptimusPrefix DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME}/plugins/)
+install(TARGETS RobotiqHandPlugin_controlMsg DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME}/plugins/)
 
 
 add_library(RobotiqHandPluginSingleHand src/RobotiqHandPluginSingleHand.cpp)

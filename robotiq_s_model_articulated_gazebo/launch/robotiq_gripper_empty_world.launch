@@ -4,9 +4,9 @@
   <arg name="paused" default="false"/>
   <arg name="gui" default="true"/>
 
-  <arg name="namespace_with_slash" default="/robotiq_hands/left_hand"/>
-  <arg name="namespace_without_slash" default="left"/>
-  <arg name="prefix_without_underscore" default="l"/>
+  <arg name="namespace_with_slash" default="/left_hand"/>
+  <arg name="namespace_without_slash" default="left_hand"/>
+  <arg name="prefix_without_underscore" default="left_hand"/>
   
 
   <!-- startup simulated world -->
@@ -20,7 +20,7 @@
   <!-- upload gripper urdf to robot_description -->
   <include file="$(find robotiq_s_model_visualization)/launch/robotiq_hand_upload.launch">
     <!-- here we have to do / + namespace_without_slash to make sure there is a / even when namespace_without_slash = "" -->
-    <arg name="namespace_with_slash" value="/$(arg namespace_without_slash)" />
+    <arg name="namespace_without_slash" value="$(arg namespace_without_slash)" />
     <arg name="prefix_without_underscore" value="$(arg prefix_without_underscore)" />
   </include>
 

@@ -18,8 +18,8 @@
     This file has been modified from the original, by Devon Ash
 */ 
 
-#include <robotiq_s_model_articulated_msgs/SModelRobotInput.h>
-#include <robotiq_s_model_articulated_msgs/SModelRobotOutput.h>
+// #include <robotiq_s_model_articulated_msgs/SModelRobotInput.h>
+// #include <robotiq_s_model_articulated_msgs/SModelRobotOutput.h>
 #include <ros/ros.h>
 #include <string>
 #include <vector>
@@ -36,21 +36,43 @@ I'm not sure exactly where the dependency chain includes PID.hh for the first ti
 #include <gazebo/common/Time.hh>
 #include <gazebo/math/Angle.hh>
 #include <gazebo/physics/physics.hh>
-#include <robotiq_s_model_articulated_gazebo_plugins/RobotiqHandPlugin.h>
+#include <robotiq_s_model_articulated_gazebo_plugins/RobotiqHandPlugin_controlMsg.h>
 #undef private
 
 // Default topic names initialization.
-const std::string RobotiqHandPlugin::DefaultLeftTopicCommand  =
-  "/left_hand/command";
-const std::string RobotiqHandPlugin::DefaultLeftTopicState    =
-  "/left_hand/state";
-const std::string RobotiqHandPlugin::DefaultRightTopicCommand =
-  "/right_hand/command";
-const std::string RobotiqHandPlugin::DefaultRightTopicState   =
-  "/right_hand/state";
+// const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicCommand  =
+  // "/left_hand/command";
+// const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicState    =
+  // "/left_hand/state";
+// const std::string RobotiqHandPluginControlMsg::DefaultRightTopicCommand =
+  // "/right_hand/command";
+// const std::string RobotiqHandPluginControlMsg::DefaultRightTopicState   =
+  // "/right_hand/state";
+
+
+const std::string RobotiqHandPluginControlMsg::left_side = "left_hand";
+const std::string RobotiqHandPluginControlMsg::right_side = "right_hand";
+
+const std::string RobotiqHandPluginControlMsg::left_prefix = "left_hand_";
+const std::string RobotiqHandPluginControlMsg::right_prefix = "right_hand_";
+
+const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicCommand  =
+  "/left_hand/SModelRobotOutput";
+const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicState    =
+  "/left_hand/SModelRobotInput";
+const std::string RobotiqHandPluginControlMsg::DefaultRightTopicCommand =
+  "/right_hand/SModelRobotOutput";
+const std::string RobotiqHandPluginControlMsg::DefaultRightTopicState   =
+  "/right_hand/SModelRobotInput";
+
+const std::string RobotiqHandPluginControlMsg::DefaultLeftTopicJointStates   =
+  "/left_hand/joint_states";
+const std::string RobotiqHandPluginControlMsg::DefaultRightTopicJointStates   =
+  "/right_hand/joint_states";
+
 
 ////////////////////////////////////////////////////////////////////////////////
-RobotiqHandPlugin::RobotiqHandPlugin()
+RobotiqHandPluginControlMsg::RobotiqHandPluginControlMsg()
 {
   // PID default parameters.
   for (int i = 0; i < this->NumJoints; ++i)
@@ -67,7 +89,7 @@ RobotiqHandPlugin::RobotiqHandPlugin()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-RobotiqHandPlugin::~RobotiqHandPlugin()
+RobotiqHandPluginControlMsg::~RobotiqHandPluginControlMsg()
 {
   gazebo::event::Events::DisconnectWorldUpdateBegin(this->updateConnection);
   this->rosNode->shutdown();
@@ -77,7 +99,7 @@ RobotiqHandPlugin::~RobotiqHandPlugin()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
+void RobotiqHandPluginControlMsg::Load(gazebo::physics::ModelPtr _parent,
                              sdf::ElementPtr _sdf)
 {
   this->model = _parent;
@@ -86,7 +108,7 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
 
   if (!this->sdf->HasElement("side") ||
       !this->sdf->GetElement("side")->GetValue()->Get(this->side) ||
-      ((this->side != "left") && (this->side != "right")))
+      ((this->side != this->left_side) && (this->side != this->right_side)))
   {
     gzerr << "Failed to determine which hand we're controlling; "
              "aborting plugin load. <Side> should be either 'left' or 'right'."
@@ -96,17 +118,11 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
 
   // Load the vector of all joints.
   std::string prefix;
-  // if (this->side == "left")
-    // prefix = "l_";
-  // else
-    // prefix = "r_";
-
-  if (this->side == "left")
-    prefix = "left_";
+  if (this->side == this->left_side)
+    prefix = this->left_prefix;
   else
-    prefix = "right_";
+    prefix = this->right_prefix;
 
-  
   // Load the vector of all joints.
   if (!this->FindJoints())
     return;
@@ -130,7 +146,7 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
   // Default ROS topic names.
   std::string controlTopicName = this->DefaultLeftTopicCommand;
   std::string stateTopicName   = this->DefaultLeftTopicState;
-  if (this->side == "right")
+  if (this->side == this->right_side)
   {
     controlTopicName = this->DefaultRightTopicCommand;
     stateTopicName   = this->DefaultRightTopicState;
@@ -187,21 +203,33 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
   this->pmq.startServiceThread();
 
   // Broadcasts state.
-  this->pubHandleStateQueue = this->pmq.addPub<robotiq_s_model_articulated_msgs::SModelRobotInput>();
-  this->pubHandleState = this->rosNode->advertise<robotiq_s_model_articulated_msgs::SModelRobotInput>(
+  this->pubHandleStateQueue = this->pmq.addPub<robotiq_s_model_control::SModel_robot_input>();
+  this->pubHandleState = this->rosNode->advertise<robotiq_s_model_control::SModel_robot_input>(
     stateTopicName, 100, true);
 
   // Broadcast joint state.
-  std::string topicBase = std::string("robotiq_hands/") + this->side;
   this->pubJointStatesQueue = this->pmq.addPub<sensor_msgs::JointState>();
+  // std::string topicBase = std::string("robotiq_hands/") + this->side;
+  // this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
+    // topicBase + std::string("_hand/joint_states"), 10);
+  std::string topicBase = "";
+  if (this->side == this->left_side)
+  {
+    topicBase = this->DefaultLeftTopicJointStates;
+  }
+  else
+  {
+    topicBase = this->DefaultRightTopicJointStates;
+  }
   this->pubJointStates = this->rosNode->advertise<sensor_msgs::JointState>(
-    topicBase + std::string("_hand/joint_states"), 10);
+      topicBase, 10);
+
 
   // Subscribe to user published handle control commands.
   ros::SubscribeOptions handleCommandSo =
-    ros::SubscribeOptions::create<robotiq_s_model_articulated_msgs::SModelRobotOutput>(
+    ros::SubscribeOptions::create<robotiq_s_model_control::SModel_robot_output>(
       controlTopicName, 100,
-      boost::bind(&RobotiqHandPlugin::SetHandleCommand, this, _1),
+      boost::bind(&RobotiqHandPluginControlMsg::SetHandleCommand, this, _1),
       ros::VoidPtr(), &this->rosQueue);
 
   // Enable TCP_NODELAY since TCP causes bursty communication with high jitter.
@@ -214,15 +242,15 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
 
   // Start callback queue.
   this->callbackQueueThread =
-    boost::thread(boost::bind(&RobotiqHandPlugin::RosQueueThread, this));
+    boost::thread(boost::bind(&RobotiqHandPluginControlMsg::RosQueueThread, this));
 
   // Connect to gazebo world update.
   this->updateConnection =
     gazebo::event::Events::ConnectWorldUpdateBegin(
-      boost::bind(&RobotiqHandPlugin::UpdateStates, this));
+      boost::bind(&RobotiqHandPluginControlMsg::UpdateStates, this));
 
   // Log information.
-  gzlog << "RobotiqHandPlugin loaded for " << this->side << " hand."
+  gzlog << "RobotiqHandPluginControlMsg loaded for " << this->side << " hand."
         << std::endl;
   for (int i = 0; i < this->NumJoints; ++i)
   {
@@ -243,7 +271,7 @@ void RobotiqHandPlugin::Load(gazebo::physics::ModelPtr _parent,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool RobotiqHandPlugin::VerifyField(const std::string &_label, int _min,
+bool RobotiqHandPluginControlMsg::VerifyField(const std::string &_label, int _min,
   int _max, int _v)
 {
   if (_v < _min || _v > _max)
@@ -256,8 +284,8 @@ bool RobotiqHandPlugin::VerifyField(const std::string &_label, int _min,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool RobotiqHandPlugin::VerifyCommand(
-    const robotiq_s_model_articulated_msgs::SModelRobotOutput::ConstPtr &_command)
+bool RobotiqHandPluginControlMsg::VerifyCommand(
+    const robotiq_s_model_control::SModel_robot_output::ConstPtr &_command)
 {
   return this->VerifyField("rACT", 0, 1,   _command->rACT) &&
          this->VerifyField("rMOD", 0, 3,   _command->rACT) &&
@@ -280,8 +308,8 @@ bool RobotiqHandPlugin::VerifyCommand(
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::SetHandleCommand(
-    const robotiq_s_model_articulated_msgs::SModelRobotOutput::ConstPtr &_msg)
+void RobotiqHandPluginControlMsg::SetHandleCommand(
+    const robotiq_s_model_control::SModel_robot_output::ConstPtr &_msg)
 {
   boost::mutex::scoped_lock lock(this->controlMutex);
 
@@ -299,7 +327,7 @@ void RobotiqHandPlugin::SetHandleCommand(
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::ReleaseHand()
+void RobotiqHandPluginControlMsg::ReleaseHand()
 {
   // Open the fingers.
   this->handleCommand.rPRA = 0;
@@ -313,7 +341,7 @@ void RobotiqHandPlugin::ReleaseHand()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::StopHand()
+void RobotiqHandPluginControlMsg::StopHand()
 {
   // Set the target positions to the current ones.
   this->handleCommand.rPRA = this->handleState.gPRA;
@@ -322,7 +350,7 @@ void RobotiqHandPlugin::StopHand()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool RobotiqHandPlugin::IsHandFullyOpen()
+bool RobotiqHandPluginControlMsg::IsHandFullyOpen()
 {
   bool fingersOpen = true;
 
@@ -342,7 +370,7 @@ bool RobotiqHandPlugin::IsHandFullyOpen()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::UpdateStates()
+void RobotiqHandPluginControlMsg::UpdateStates()
 {
   boost::mutex::scoped_lock lock(this->controlMutex);
 
@@ -470,7 +498,7 @@ void RobotiqHandPlugin::UpdateStates()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-uint8_t RobotiqHandPlugin::GetObjectDetection(
+uint8_t RobotiqHandPluginControlMsg::GetObjectDetection(
   const gazebo::physics::JointPtr &_joint, int _index, uint8_t _rPR,
   uint8_t _prevrPR)
 {
@@ -509,7 +537,7 @@ uint8_t RobotiqHandPlugin::GetObjectDetection(
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-uint8_t RobotiqHandPlugin::GetCurrentPosition(
+uint8_t RobotiqHandPluginControlMsg::GetCurrentPosition(
   const gazebo::physics::JointPtr &_joint)
 {
   // Full range of motion.
@@ -528,7 +556,7 @@ uint8_t RobotiqHandPlugin::GetCurrentPosition(
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::GetAndPublishHandleState()
+void RobotiqHandPluginControlMsg::GetAndPublishHandleState()
 {
   // gACT. Initialization status.
   this->handleState.gACT = this->userHandleCommand.rACT;
@@ -645,7 +673,7 @@ void RobotiqHandPlugin::GetAndPublishHandleState()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::GetAndPublishJointState(
+void RobotiqHandPluginControlMsg::GetAndPublishJointState(
                                            const gazebo::common::Time &_curTime)
 {
   this->jointStates.header.stamp = ros::Time(_curTime.sec, _curTime.nsec);
@@ -660,7 +688,7 @@ void RobotiqHandPlugin::GetAndPublishJointState(
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::UpdatePIDControl(double _dt)
+void RobotiqHandPluginControlMsg::UpdatePIDControl(double _dt)
 {
   if (this->handState == Disabled)
   {
@@ -759,7 +787,7 @@ void RobotiqHandPlugin::UpdatePIDControl(double _dt)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool RobotiqHandPlugin::GetAndPushBackJoint(const std::string& _jointName,
+bool RobotiqHandPluginControlMsg::GetAndPushBackJoint(const std::string& _jointName,
                                             gazebo::physics::Joint_V& _joints)
 {
   gazebo::physics::JointPtr joint = this->model->GetJoint(_jointName);
@@ -771,26 +799,21 @@ bool RobotiqHandPlugin::GetAndPushBackJoint(const std::string& _jointName,
     return false;
   }
   _joints.push_back(joint);
-  gzlog << "RobotiqHandPlugin found joint [" << _jointName << "]" << std::endl;
+  gzlog << "RobotiqHandPluginControlMsg found joint [" << _jointName << "]" << std::endl;
   return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool RobotiqHandPlugin::FindJoints()
+bool RobotiqHandPluginControlMsg::FindJoints()
 {
   // Load up the joints we expect to use, finger by finger.
   gazebo::physics::JointPtr joint;
   std::string prefix;
   std::string suffix;
-  // if (this->side == "left")
-    // prefix = "l_";
-  // else
-    // prefix = "r_";
-
-  if (this->side == "left")
-    prefix = "left_";
+  if (this->side == this->left_side)
+    prefix = this->left_prefix;
   else
-    prefix = "right_";
+    prefix = this->right_prefix;
 
   // palm_finger_1_joint (actuated).
   suffix = "palm_finger_1_joint";
@@ -880,13 +903,13 @@ bool RobotiqHandPlugin::FindJoints()
     return false;
   this->jointNames.push_back(prefix + suffix);
 
-  gzlog << "RobotiqHandPlugin found all joints for " << this->side
+  gzlog << "RobotiqHandPluginControlMsg found all joints for " << this->side
         << " hand." << std::endl;
   return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void RobotiqHandPlugin::RosQueueThread()
+void RobotiqHandPluginControlMsg::RosQueueThread()
 {
   static const double timeout = 0.01;
 
@@ -896,4 +919,4 @@ void RobotiqHandPlugin::RosQueueThread()
   }
 }
 
-GZ_REGISTER_MODEL_PLUGIN(RobotiqHandPlugin)
+GZ_REGISTER_MODEL_PLUGIN(RobotiqHandPluginControlMsg)
