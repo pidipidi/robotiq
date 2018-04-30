@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="namespace_with_slash" default="??namespace_with_slash??"/>
+  <arg name="prefix_without_underscore" default="??prefix_without_underscore??"/>
+
+  <!-- https://answers.ros.org/question/38956/pass-parameters-to-xacro-in-launch-file/ -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find robotiq_s_model_visualization)/cfg/robotiq_hand_robot.urdf.xacro' namespace_with_slash:=$(arg namespace_with_slash) prefix_without_underscore:=$(arg prefix_without_underscore)" />
+</launch>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="robotiq_hand" >
+
+  <xacro:arg name="namespace_with_slash" default="/gripper"/>
+  <xacro:arg name="prefix_without_underscore" default="gripper"/>
+  <xacro:arg name="prefix" default="$(arg prefix_without_underscore)_"/>
+
+  <!-- common stuff -->
+  <!-- https://answers.ros.org/question/216975/loading-variables-with-xacroinclude/ -->
+  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/common.gazebo.xacro">
+    <xacro:arg name="namespace_with_slash" value="$(arg namespace_with_slash)"/>
+  </xacro:include>
+
+  <!-- robotiq_hand -->
+  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/robotiq_hand_macro.urdf.xacro" />
+
+
+  <link name="world"/>
+
+  <!-- robotiq_hand -->
+  <xacro:robotiq_hand prefix="$(arg prefix)" parent="world" reflect="-1">
+    <origin rpy="0 0 0" xyz="0 0 1.0"/>
+  </xacro:robotiq_hand>
+
+
+
+</robot>

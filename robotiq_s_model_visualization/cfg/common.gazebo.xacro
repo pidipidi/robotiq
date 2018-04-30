@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" >
+
+  <gazebo>
+    <plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">
+      <!-- <robotNamespace>$(arg namespace_with_slash)</robotNamespace> -->
+      <side>left</side>
+    </plugin>
+  </gazebo>
+
+</robot>

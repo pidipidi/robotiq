@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- If you want to have a namespace, do "/xxx". If not, do "" -->
+  <arg name="namespace_with_slash" default="/gripper"/>
+  <arg name="namespace_without_slash" default="gripper"/>
+  <arg name="prefix_without_underscore" default="l"/>
+  
+  <!-- send robot urdf to param server -->
+  <include file="$(find robotiq_s_model_visualization)/launch/robotiq_hand_upload.launch">
+    <!-- here we have to do / + namespace_without_slash to make sure there is a / even when namespace_without_slash = "" -->
+    <arg name="namespace_with_slash" value="/$(arg namespace_without_slash)" />
+    <arg name="prefix_without_underscore" value="$(arg prefix_without_underscore)" />
+  </include>
+
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotiq_s_model_visualization)/rviz/urdf.rviz" required="true" />
+
+
+</launch>
