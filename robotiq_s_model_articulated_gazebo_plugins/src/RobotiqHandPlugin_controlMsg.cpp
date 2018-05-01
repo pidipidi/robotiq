@@ -115,7 +115,9 @@ void RobotiqHandPluginControlMsg::Load(gazebo::physics::ModelPtr _parent,
       ((this->side != this->left_side) && (this->side != this->right_side)))
   {
     gzerr << "Failed to determine which hand we're controlling; "
-             "aborting plugin load. <Side> should be either 'left' or 'right'."
+             "aborting plugin load. <Side> should be either "
+          << this->left_side << " or " << this->left_side << "!"
+          << "\nYour input side=" << this->side
           << std::endl;
     return;
   }

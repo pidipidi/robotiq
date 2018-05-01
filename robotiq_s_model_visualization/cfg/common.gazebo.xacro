@@ -1,18 +1,19 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" >
   
-  <xacro:arg name="namespace_without_slash" default="left_hand"/>
+  <xacro:macro name="robotiq_common_gazebo" params="namespace_without_slash">
 
-  <!-- <gazebo>
-    <plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">
-      <side>$(arg namespace_without_slash)</side>
-    </plugin>
-  </gazebo> -->
+    <!-- <gazebo>
+      <plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">
+        <side>${namespace_without_slash}</side>
+      </plugin>
+    </gazebo> -->
 
-  <gazebo>
-    <plugin name="RobotiqHandPluginControlMsg" filename="libRobotiqHandPlugin_controlMsg.so">
-      <side>$(arg namespace_without_slash)</side>
-    </plugin>
-  </gazebo>
-  
+    <gazebo>
+      <plugin name="RobotiqHandPluginControlMsg" filename="libRobotiqHandPlugin_controlMsg.so">
+        <side>${namespace_without_slash}</side>
+      </plugin>
+    </gazebo>
+
+  </xacro:macro>
 </robot>

@@ -8,9 +8,9 @@
 
   <!-- common stuff -->
   <!-- https://answers.ros.org/question/216975/loading-variables-with-xacroinclude/ -->
-  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/common.gazebo.xacro">
-    <xacro:arg name="namespace_without_slash" value="$(arg namespace_without_slash)"/>
-  </xacro:include>
+  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/common.gazebo.xacro" />
+  <xacro:robotiq_common_gazebo namespace_without_slash="$(arg namespace_without_slash)" />
+
 
   <!-- robotiq_hand -->
   <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/robotiq_hand_macro.urdf.xacro" />
