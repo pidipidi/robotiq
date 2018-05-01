@@ -1,4 +1,9 @@
 # robotiq
+* Based on the `jade-devel` branch of [`robotiq`](https://github.com/ros-industrial/robotiq), we have built [our own fork with the `irg-jade` branch](https://github.com/Shentheman/robotiq/tree/irg-jade).
+
+## Meshes
+* We are using the original URDF [`robotiq/robotiq_s_model_visualization/cfg/robotiq_hand_macro.urdf.xacro`](https://github.com/ros-industrial/robotiq/blob/jade-devel/robotiq_s_model_visualization/cfg/robotiq_hand_macro.urdf.xacro) from [`jade-devel` branch of `robotiq`](https://github.com/ros-industrial/robotiq)
+
 
 ## Gazebo simulation pipeline
 * `roslaunch robotiq_s_model_articulated_gazebo robotiq_gripper_empty_world.launch`
@@ -6,6 +11,7 @@
       - This `/left_hand/joint_states` is defined [here](https://github.com/Shentheman/robotiq/blob/16a39a78a2db1c43830b7d025a1fc3901d985deb/robotiq_s_model_articulated_gazebo_plugins/src/RobotiqHandPlugin_controlMsg.cpp#L68)
 * And then the [`joint_state_publisher`](https://github.com/Shentheman/robotiq/blob/16a39a78a2db1c43830b7d025a1fc3901d985deb/robotiq_s_model_articulated_gazebo/launch/controller_utils.launch#L12) will publish the information at `/left_hand/joint_states` inside the `\source_list` forward to `/joint_states`.
 * Then the [`robot_state_publisher`](https://github.com/Shentheman/robotiq/blob/16a39a78a2db1c43830b7d025a1fc3901d985deb/robotiq_s_model_articulated_gazebo/launch/controller_utils.launch#L21) will use the information at `/joint_states` to publish the `tf`, so in RVIZ, you can view the robot using `RobotModel`.
+
 
 ## Usage
 * http://gazebosim.org/tutorials?tut=drcsim_robotiq_hand&cat=
