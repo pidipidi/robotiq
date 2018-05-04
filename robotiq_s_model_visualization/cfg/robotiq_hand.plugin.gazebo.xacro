@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" >
   
-  <xacro:macro name="robotiq_common_gazebo" params="namespace_without_slash">
+  <xacro:macro name="robotiq_hand_plugin_gazebo" params="namespace_without_slash">
 
     <!-- <gazebo>
       <plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">
