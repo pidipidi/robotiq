@@ -18,7 +18,7 @@ link_directories(
 catkin_package(
    DEPENDS gazebo_plugins gazebo_ros robotiq_s_model_articulated_msgs roscpp robotiq_s_model_control
 )
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_library(RobotiqHandPlugin src/RobotiqHandPlugin.cpp)
 set_target_properties(RobotiqHandPlugin PROPERTIES LINK_FLAGS "${ld_flags}")
